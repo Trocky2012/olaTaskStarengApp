@@ -1,8 +1,8 @@
 {
   "expo": {
-    "name": "olaTaskApp",
-    "slug": "olaTaskApp",
-    "version": "1.0.0",
+    "name": "Ola Task",
+    "slug": "Ola_Task",
+    "version": "3.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
@@ -23,7 +23,10 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
-      }
+      },
+      "package": "com.trocky2012.Ola_Task",
+      "permissions": [],
+      "versionCode": 3
     },
     "web": {
       "favicon": "./assets/favicon.png"

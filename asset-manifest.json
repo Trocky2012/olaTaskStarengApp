@@ -1,0 +1,22 @@
+{
+  "files": {
+    "app.js": "/olaTaskStarengApp/static/js/app.c523720e.chunk.js",
+    "app.js.map": "/olaTaskStarengApp/static/js/app.c523720e.chunk.js.map",
+    "runtime~app.js": "/olaTaskStarengApp/static/js/runtime~app.f6ac1537.js",
+    "runtime~app.js.map": "/olaTaskStarengApp/static/js/runtime~app.f6ac1537.js.map",
+    "static/js/2.fff10aea.chunk.js": "/olaTaskStarengApp/static/js/2.fff10aea.chunk.js",
+    "static/js/2.fff10aea.chunk.js.map": "/olaTaskStarengApp/static/js/2.fff10aea.chunk.js.map",
+    "favicon-16.png": "/olaTaskStarengApp/favicon-16.png",
+    "favicon-32.png": "/olaTaskStarengApp/favicon-32.png",
+    "favicon.ico": "/olaTaskStarengApp/favicon.ico",
+    "index.html": "/olaTaskStarengApp/index.html",
+    "manifest.json": "/olaTaskStarengApp/manifest.json",
+    "serve.json": "/olaTaskStarengApp/serve.json",
+    "static/js/2.fff10aea.chunk.js.LICENSE.txt": "/olaTaskStarengApp/static/js/2.fff10aea.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime~app.f6ac1537.js",
+    "static/js/2.fff10aea.chunk.js",
+    "static/js/app.c523720e.chunk.js"
+  ]
+}

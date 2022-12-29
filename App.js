@@ -49,7 +49,8 @@ class App extends Component {
       newLoginPhone:'',
       createdPostID:'',
       userID:'',
-      userName:''
+      userName:'',
+      userProjectId:''
     };
     this.setEmail = this.setEmail.bind(this);
     this.setPassword = this.setPassword.bind(this);
@@ -94,35 +95,34 @@ class App extends Component {
   setCreatedPostID(text){   this.setState({createdPostID: text}); }
   setUserID(text){   this.setState({userID: text}); }
   setUserName(text){   this.setState({userName: text}); }
+  setUserProjectId(text){   this.setState({userProjectId: text}); }
 
 
-  // async componentDidMount(){
-  //   // const response = await api.get('posts/get-by-status?status=OPEN');
-  //   const response = await api.get('posts');
-  //   this.setState({
-  //     posts: response.data,
-  //     loading: false
-  //   });
-  // }
+
   
   //Entry - Email and Password
   async fcnEntryModalCheckAndClose(){
     if(this.state.email.length > 5 && this.state.email.includes("@") && this.state.email.includes(".com")){
-      if(this.state.password.length > 6 && this.state.password!='none.ks$ata*0lo3h4seq@wt@uiH2GfdX9asdzbv$7rhgd'){
+      if(this.state.password.length > 5 && this.state.password!='none.ks$ata*0lo3h4seq@wt@uiH2GfdX9asdzbv$7rhgd'){
         try{
           this.setState({loadMyPosts: true});
-           const TextForRerquest = 'users/find-by-email?email='+((this.state.email).toString())+
+           const TextForRerquest = 'users/find-by-email-and-pssd?email='+((this.state.email).toString())+
                       '&pssd=kw*s.x$37tth@$u0K8lE9'+((this.state.password).toString()+'0K2.lp$fzE6qj*tk5lp@$');
-          // const TextForRerquest = 'users/find-by-email?email=thiago@email.com&pssd=1234567';
-          user.push(await (await api.get(TextForRerquest)).data);
-
-          if(user[0].name.length > 0){
+           //const TextForRerquest = 'users/find-by-email-and-pssd?email=thiago@email.com&pssd=1234567';
+           //const TextForRerquest = 'users/find-by-email-and-pssd?email=thiago@email.com&pssd='+(this.state.password).toString();
+           //const TextForRerquest = 'users/find-by-email-and-pssd?email=thiago@email.com&pssd=none.ks$ata*0lo3h4seq@wt@uiH2GfdX9asdzbv$7rhgd';
+          
+          let response = (await api.get(TextForRerquest)).data;
+          user.push(response);
+          //console.log(response.firstName);
+          if(response.firstName.length > 0){
             this.setUserID(user[0].id);
-            this.setUserName(user[0].name);
+            this.setUserName(user[0].firstName);
+            this.setUserProjectId(user[0].projectId);
             // this.setUserName(user[0].firstName+' '+user[0].lastName);
   
             // const path = 'posts/opened-post-but-remove-user-id/'+(this.state.userID).toString();
-            const path = 'posts/get-by-status?status=OPEN';
+            const path = 'posts/find-by-project-id/'+this.state.userProjectId+'/and-by-status?status=OPEN';
             const response = await api.get(path);
             this.setState({
               posts: response.data,
@@ -223,10 +223,10 @@ class App extends Component {
       
         if(firstName.length > 1 && lastName.length > 1){
           if(email.length > 5 && email.includes("@") && email.includes(".com")) {
-            if(password.length > 7 && password2.length  > 7 && password === password2 && 
+            if(password.length > 5 && password2.length  > 5 && password === password2 && 
                 (!password.includes('kw*s.x$37tth@$u0K8lE9')||!password.includes('0K2.lp$fzE6qj*tk5lp@$'))){
                   this.setState({loadMyPosts: true});
-                  const TextForRerquest = 'users/find-by-email?email='+email+
+                  const TextForRerquest = 'users/find-by-email-and-pssd?email='+email+
                                           '&pssd=none.ks$ata*0lo3h4seq@wt@uiH2GfdX9asdzbv$7rhgd';
                   try{
                     const responseOfCheckEmail = await api.get(TextForRerquest);
@@ -261,7 +261,7 @@ class App extends Component {
             }else {
               // this.setState({newLoginPassword: ''});
               // this.setState({newLoginPassword2: ''});
-              alert('Write your password again, please.\n\nTip: It must contain at least 8 characters.');
+              alert('Write your password again, please.\n\nTip: It must contain at least 6 characters.');
             }
           }else{
             alert('Please, check your email.');
@@ -270,15 +270,14 @@ class App extends Component {
           alert('You must fill up your first and last name');
         }
 
-      
-    
-
   }
+  // ATTENTION! THE PROJECT_ID FOR THE NEW LOGIN CREATED TROUGH THE APP IS A DEFAULT 11 - OLA TASK PROJECT ID. READ A PROJECT ID (NEW PAGE) IF AND TO CREATE USERS FOR OTHER PROJECT,
   async CreateNewLogin(){
     try{
       this.setState({loadMyPosts: true});
       const newUserData = 
         {
+          "projectId": 11,
           "firstName": this.state.newLoginFirstName,
           "lastName": this.state.newLoginLastName,
           "email": this.state.newLoginEmail,
@@ -364,7 +363,7 @@ class App extends Component {
   }
 
       try{
-          const path = 'posts/get-by-type-status-and-user-assigned?type='+StrType+'&status='+StrStatus+'&user_id='+this.state.userID;
+          const path = 'posts/find-by-type-status-and-user-assigned?type='+StrType+'&status='+StrStatus+'&user_id='+this.state.userID;
           const response = await api.get(path);
           this.setState({
             postsByUser: response.data,
@@ -412,7 +411,7 @@ class App extends Component {
       try{
         if(onlyUserId){
           // IF it is in "MY LIST" get ONLY user_id
-          const path = 'posts/get-by-type-status-and-user-id?type='+StrType+'&status='+StrStatus+'&user_id='+this.state.userID;
+          const path = 'posts/find-by-type-status-and-user-id?type='+StrType+'&status='+StrStatus+'&user_id='+this.state.userID;
           const response = await api.get(path);
           this.setState({
             postsByUser: response.data,
@@ -420,7 +419,7 @@ class App extends Component {
           });
         } else{
           // IF it is NOT in "MY LIST" get REMOVIND user_id
-          const path = 'posts/get-by-type-status-but-remove-user-id?type='+StrType+'&status='+StrStatus+'&user_id='+this.state.userID;
+          const path = 'posts/find-by-project-id/'+this.state.userProjectId+'/and-by-type-status-but-remove-user-id?type='+StrType+'&status='+StrStatus+'&user_id='+this.state.userID;
           const response = await api.get(path);
           this.setState({
             posts: response.data,
@@ -465,7 +464,7 @@ class App extends Component {
     try{
       if(onlyUserId){
         // IF it is in "MY LIST" get ONLY user_id
-        const path = 'posts/get-by-type-status-and-user-id?type='+StrType+'&status='+StrStatus+'&user_id='+this.state.userID;
+        const path = 'posts/find-by-type-status-and-user-id?type='+StrType+'&status='+StrStatus+'&user_id='+this.state.userID;
         const response = await api.get(path);
         this.setState({
           postsByUser: response.data,
@@ -476,9 +475,9 @@ class App extends Component {
         // const path = 'posts/get-by-type-status-but-remove-user-id?type='+StrType+'&status='+StrStatus+'&user_id='+this.state.userID;
         var path = '';
         if(StrType=='none'){
-          path = 'posts/get-by-status?status=OPEN';
+          path = 'posts/find-by-project-id/'+this.state.userProjectId+'/and-by-status?status=OPEN';
         }else{
-          path = 'posts/get-by-type-and-status?type='+StrType+'&status=OPEN';
+          path = 'posts/find-by-project-id/'+this.state.userProjectId+'/and-by-type-and-status?type='+StrType+'&status=OPEN';
         }
         const response = await api.get(path);
         this.setState({
@@ -511,7 +510,7 @@ class App extends Component {
       StrStatus='none';
       StrType='none';
 
-      const response = await api.get('posts/get-by-user-id/'+(user[0].id).toString());
+      const response = await api.get('posts/find-by-user-id/'+(user[0].id).toString());
       this.setState({
         postsByUser: response.data,
         loadMyPosts: false
@@ -540,7 +539,7 @@ class App extends Component {
     StrType='none';
 
     try{
-      const response = await api.get('posts/get-by-assigned-user/'+(user[0].id).toString());
+      const response = await api.get('posts/find-by-assigned-user/'+(user[0].id).toString());
       this.setState({
         postsByUser: response.data,
         loadMyPosts: false
@@ -579,7 +578,7 @@ class App extends Component {
       const userEmailToAssign = this.state.postAssignedUser.toString();
 
       if(userEmailToAssign!=''){
-        const TextForRerquest = 'users/find-by-email?email='+userEmailToAssign+
+        const TextForRerquest = 'users/find-by-email-and-pssd?email='+userEmailToAssign+
                                 '&pssd=none.ks$ata*0lo3h4seq@wt@uiH2GfdX9asdzbv$7rhgd';
         try{
           const responseOfCheckEmail = await api.get(TextForRerquest);
@@ -644,6 +643,7 @@ class App extends Component {
       this.setState({loadMyPosts: true});
         const newUserData = 
         {
+          "projectId":(user[0].projectId).toString(),
           "title": this.state.postTitle,
           "description": this.state.postDescription,
           "type": this.state.postType,

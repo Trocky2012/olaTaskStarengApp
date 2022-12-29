@@ -44,8 +44,9 @@ async executeFunctionToDeleteCard(id) {
   this.setState({ loadingToDeleteTask:true });
   try{
 
-    // const getPost = 'http://192.168.0.111:8080/tasks/'+id.toString();
-    const getPost = 'https://ola-task.herokuapp.com/tasks/'+id.toString();
+    //const getPost = 'http://192.168.1.11:8080/tasks/'+id.toString();
+    //const getPost = 'https://ola-task.herokuapp.com/tasks/'+id.toString();
+    const getPost = 'https://timing-control.herokuapp.com/tasks/'+id.toString();
 
     await postApi.delete(getPost);
 

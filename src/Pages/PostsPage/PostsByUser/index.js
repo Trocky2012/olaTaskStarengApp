@@ -377,7 +377,7 @@ class PostsByUser extends Component{
                     </View>
                     <View style={styles.AreaCreatedByUserIsideAPost}>
                       <View style={styles.botaoCreatedByUserIsideAPost2} >
-                        <Text style={styles.botaoTextoCreatedByUser}>Assigned to: {this.state.assignUser.name}</Text>
+                        <Text style={styles.botaoTextoCreatedByUser}>Assigned to: {this.state.assignUser.firstName}  {this.state.assignUser.lastName}</Text>
                       </View>
                     </View>
                 </View>

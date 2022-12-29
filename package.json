@@ -1,32 +1,38 @@
 {
   "main": "node_modules/expo/AppEntry.js",
+  "homepage": "https://trocky2012.github.io/olaTaskStarengApp",
   "scripts": {
     "start": "expo start",
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
-    "eject": "expo eject"
+    "eject": "expo eject",
+    "deploy": "gh-pages -d web-build",
+    "predeploy": "expo export:web"
+
   },
   "dependencies": {
-    "@react-native-picker/picker": "2.2.1",
+    "@react-native-picker/picker": "2.4.2",
     "@react-navigation/native": "^6.0.8",
     "@react-navigation/native-stack": "^6.5.0",
     "axios": "^0.26.0",
     "babel-plugin-module-resolver": "^4.1.0",
     "date-fns": "^2.28.0",
-    "expo": "~44.0.0",
-    "expo-status-bar": "~1.2.0",
-    "react": "17.0.1",
-    "react-dom": "17.0.1",
-    "react-native": "0.64.3",
+    "expo": "~46.0.0",
+    "expo-analytics-segment": "^11.2.1",
+    "expo-status-bar": "~1.4.0",
+    "expo-updates": "~0.14.7",
+    "react": "18.0.0",
+    "react-dom": "18.0.0",
+    "react-native": "0.69.6",
     "react-native-reversed-flat-list": "^1.0.2",
-    "react-native-safe-area-context": "3.3.2",
-    "react-native-screens": "~3.10.1",
-    "react-native-web": "0.17.1",
-    "expo-updates": "~0.11.6"
+    "react-native-safe-area-context": "4.3.1",
+    "react-native-screens": "~3.15.0",
+    "react-native-web": "~0.18.7"
   },
   "devDependencies": {
-    "@babel/core": "^7.12.9"
+    "@babel/core": "^7.12.9",
+    "gh-pages": "^4.0.0"
   },
   "private": true
 }

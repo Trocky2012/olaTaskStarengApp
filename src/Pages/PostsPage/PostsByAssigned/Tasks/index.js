@@ -83,13 +83,13 @@ async saveDescriptionAndGoToDone(id,title,description,comments,status,start_time
             "urlPhoto": urlPhoto.toString()
           };
           // const path = 'http://192.168.0.111:8080/tasks/'+id.toString();
-          const path = 'https://ola-task.herokuapp.com/tasks/'+id.toString();
+          const path = 'https://timing-control.herokuapp.com/tasks/'+id.toString();
           await postApi.put(path,newData);
           this.setState({details: false});
           this.setState({showCommentsFromApi:true})
 
           // const getPost = 'http://192.168.0.111:8080/tasks/'+id.toString()+'/next-status';
-          const getPost = 'https://ola-task.herokuapp.com/tasks/'+id.toString()+'/next-status';
+          const getPost = 'https://timing-control.herokuapp.com/tasks/'+id.toString()+'/next-status';
           // const getPost = 'http://192.168.0.23:8080/tasks/'+id.toString();
           await postApi.put(getPost);
 
@@ -115,8 +115,9 @@ async executeGoToNextStatus(id) {
   
   try{
 
-    // const getPost = 'http://192.168.0.111:8080/tasks/'+id.toString()+'/next-status';
-    const getPost = 'https://ola-task.herokuapp.com/tasks/'+id.toString()+'/next-status';
+    //const getPost = 'http://192.168.1.11:8080/tasks/'+id.toString()+'/next-status';
+    //const getPost = 'https://ola-task.herokuapp.com/tasks/'+id.toString()+'/next-status';
+    const getPost = 'https://timing-control.herokuapp.com/tasks/'+id.toString()+'/next-status';
 
     await postApi.put(getPost);
 

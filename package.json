@@ -9,7 +9,6 @@
     "eject": "expo eject",
     "deploy": "gh-pages -d web-build",
     "predeploy": "expo export:web"
-
   },
   "dependencies": {
     "@react-native-picker/picker": "2.4.2",
